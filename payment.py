@@ -8,7 +8,8 @@ def payment(hour, rate):
     payment = hour * rate
     if hour > 40:
         payment = payment + ((hour - 40) * rate * 0.5)
-    return payment
+    return round(payment, 2)
+
 
 def get_employees():
     employees_list= []
@@ -19,10 +20,13 @@ def get_employees():
         index_names = aux.pop(0)
         for emp in aux:
             if len(emp)>1:
-                employee = [(index_names[0], emp[0]),(index_names[1], emp[1]), (index_names[2], emp[2])]
+                employee = [(emp[0]),int(emp[1]), (emp[2]).replace('\n', "")]
                 employees_list.append(employee)
-        print(employees_list)
+    return employees_list
 
 
 if __name__ == '__main__':
-    get_employees()
+    employees = get_employees()
+    print(employees)
+    for emp in employees:
+        print(emp[0] + "the payment is " + str(payment(emp[1], float(emp[2]))))
